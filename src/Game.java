@@ -4,28 +4,27 @@ public interface Game {
 
     Scanner in = new Scanner(System.in);
 
-    public static void load() {
+    static void load() {
         System.out.println();
     }
 
-    public static Board create() {
+    static Board create() {
         System.out.println("Enter the size of the board");
         System.out.print("x:");
         int x = in.nextInt();
         System.out.print("y:");
         int y = in.nextInt();
-        Board b = new Board(x, y);
-        return b;
+        return new Board(x, y);
     }
 
-    public static void update(Board b) {
+    static void update(Board b) {
         b.draw();
         b.press();
         b.checkWin();
 
     }
 
-    public static void play(){
+    static void play(){
         Game.load();
         Board b = Game.create();
         while (!(b.getLose() || b.getWin())) {

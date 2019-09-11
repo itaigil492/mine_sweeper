@@ -1,9 +1,8 @@
 import java.util.Scanner;
 
-public class Board {
+class Board {
 
-    Scanner in = new Scanner(System.in);
-    private final double BMBPERC = 0.23;
+    private Scanner in = new Scanner(System.in);
     private int x, y;
     private Point[][] board;
     private boolean win = false, lose = false;
@@ -14,7 +13,7 @@ public class Board {
      * @param x - the width
      * @param y - the height
      */
-    public Board(int x, int y) {
+    Board(int x, int y) {
         this.x = x;
         this.y = y;
         this.clearPoints();
@@ -25,29 +24,29 @@ public class Board {
 
     // gets and sets
 
-    public boolean getWin() {
+    boolean getWin() {
         return this.win;
     }
 
-    public boolean getLose() {
+    boolean getLose() {
         return this.lose;
     }
 
     // Point generators
 
-    public void clearPoints() {
-        Point[][] b = new Point[this.y][this.x];
-        this.board = b;
+    private void clearPoints() {
+        this.board = new Point[this.y][this.x];
         for (int y = 0; y < this.y; y++) {
             for (int x = 0; x < this.x; x++) {
-                Point p = new Point(x, y, 0);
+                Point p = new Point(0);
                 this.board[y][x] = p;
             }
         }
     }
 
-    public void bmbRandomize() { // generates the bombs
+    private void bmbRandomize() { // generates the bombs
         int x, y;
+        double BMBPERC = 0.23;
         for (int i = 0; i < (int) ((this.x * this.y) * BMBPERC)+1; i++) { // when i use the bmbNum the bombs just doesn't
             // generate
             x = (int) (Math.random() * this.x);
@@ -62,7 +61,7 @@ public class Board {
 
     }
 
-    public void numPut() { // generates the numbers using the bombs (checks around each point how many
+    private void numPut() { // generates the numbers using the bombs (checks around each point how many
         // bombs are there)
 
         for (int y = 0; y < this.y; y++) {
@@ -112,7 +111,7 @@ public class Board {
 
     // board drawing
 
-    public void draw() {
+    void draw() {
         System.out.print("   ");
         for (int i = 0; i < this.x; i++) {
             if (i < 10)
@@ -146,7 +145,7 @@ public class Board {
 
     // points effects
 
-    public void explode(Point p) {
+    private void explode(Point p) {
         if (p.getSmbl() == 9)
             this.lose();
     }
@@ -191,7 +190,7 @@ public class Board {
 
 
     }
-    public void press() {
+    void press() {
 
         System.out.println();
         System.out.print("x:");
@@ -217,7 +216,7 @@ public class Board {
     }
 
     // others
-    public void revealAll() {
+    void revealAll() {
         for (int y = 0; y < this.y; y++) {
             for (int x = 0; x < this.x; x++) {
                 this.board[y][x].reveal();
@@ -227,17 +226,17 @@ public class Board {
 
     }
 
-    public void win() {
+    private void win() {
         this.win = true;
     }
 
-    public void lose() {
+    private void lose() {
         this.lose = true;
     }
 
     // game end
 
-    public void checkWin() {
+    void checkWin() {
         boolean shouldWin = true;
         for (int y = 0; y < this.y; y++) {
             for (int x = 0; x < this.x; x++) {
