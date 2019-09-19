@@ -46,7 +46,7 @@ class Board {
 
     private void bmbRandomize() { // generates the bombs
         int x, y;
-        double BMBPERC = 0.23;
+        double BMBPERC = 0.21;
         for (int i = 0; i < (int) ((this.x * this.y) * BMBPERC)+1; i++) { // when i use the bmbNum the bombs just doesn't
             // generate
             x = (int) (Math.random() * this.x);
